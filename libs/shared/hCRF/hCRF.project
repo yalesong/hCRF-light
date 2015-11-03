@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeLite_Project Name="hCRF" InternalType="Console">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
+    </Plugin>
+  </Plugins>
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="src">
+    <File Name="src/DataSequenceRealtime.cpp"/>
+    <File Name="src/dataset.cpp"/>
+    <File Name="src/Dummys.cpp"/>
+    <File Name="src/evaluator.cpp"/>
+    <File Name="src/featuregenerator.cpp"/>
+    <File Name="src/InferenceEngine.cpp"/>
+    <File Name="src/matrix.cpp"/>
+    <File Name="src/matrix.inl"/>
+    <File Name="src/matrixSSE2.cpp"/>
+    <File Name="src/model.cpp"/>
+    <File Name="src/MyFeatures.cpp"/>
+    <File Name="src/optimizer.cpp"/>
+    <VirtualDirectory Name="Evaluators">
+      <File Name="src/evaluatorCRF.cpp"/>
+      <File Name="src/evaluatorHCRF.cpp"/>
+      <File Name="src/evaluatorLDCRF.cpp"/>
+      <File Name="src/evaluatorLVPERCEPTRON.cpp"/>
+      <File Name="src/EvaluatorSharedLDCRF.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Features">
+      <File Name="src/BackwardWindowRawFeatures.cpp"/>
+      <File Name="src/EdgeFeatures.cpp"/>
+      <File Name="src/EdgeObservationFeatures.cpp"/>
+      <File Name="src/FeaturesOne.cpp"/>
+      <File Name="src/LabelEdgeFeatures.cpp"/>
+      <File Name="src/RawFeatures.cpp"/>
+      <File Name="src/RawFeaturesSquare.cpp"/>
+      <File Name="src/SharedFeatures.cpp"/>
+      <File Name="src/WindowRawFeatures.cpp"/>
+      <File Name="src/GateNodeFeatures.cpp"/>
+      <File Name="src/StartFeatures.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Gradients">
+      <File Name="src/GradientCRF.cpp"/>
+      <File Name="src/GradientFD.cpp"/>
+      <File Name="src/GradientHCRF.cpp"/>
+      <File Name="src/GradientHMMPerceptron.cpp"/>
+      <File Name="src/GradientLDCRF.cpp"/>
+      <File Name="src/GradientPerceptron.cpp"/>
+      <File Name="src/GradientSharedLDCRF.cpp"/>
+      <File Name="src/GradientCNF.cpp"/>
+      <File Name="src/GradientLDCNF.cpp"/>
+      <File Name="src/gradient.cpp"/>
+      <File Name="src/GradientSHDCRF.cpp"/>
+      <File Name="src/GradientHCNF.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="InferenceEngines">
+      <File Name="src/InferenceEngineBP.cpp"/>
+      <File Name="src/InferenceEngineBrute.cpp"/>
+      <File Name="src/InferenceEngineDC.cpp"/>
+      <File Name="src/InferenceEngineFB.cpp"/>
+      <File Name="src/InferenceEngineFF.cpp"/>
+      <File Name="src/InferenceEnginePerceptron.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Optimizers">
+      <File Name="src/OptimizerASA.cpp"/>
+      <File Name="src/OptimizerCG.cpp"/>
+      <File Name="src/OptimizerLBFGS.cpp"/>
+      <File Name="src/OptimizerPerceptron.cpp"/>
+      <File Name="src/OptimizerOWL.cpp"/>
+      <File Name="src/OptimizerUncOptim.cpp"/>
+    </VirtualDirectory>
+    <VirtualDirectory Name="Toolboxes">
+      <File Name="src/ToolboxCRF.cpp"/>
+      <File Name="src/ToolboxHCRF.cpp"/>
+      <File Name="src/ToolboxGHCRF.cpp"/>
+      <File Name="src/ToolboxHMMPerceptron.cpp"/>
+      <File Name="src/ToolboxLDCRF.cpp"/>
+      <File Name="src/ToolboxLVPERCEPTRON.cpp"/>
+      <File Name="src/ToolboxSharedLDCRF.cpp"/>
+    </VirtualDirectory>
+    <File Name="src/MyToolbox.cpp"/>
+    <File Name="src/toolbox.cpp"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="include">
+    <File Name="include/toolbox.h"/>
+    <File Name="include/MyToolbox.h"/>
+    <File Name="include/dataset.h"/>
+    <File Name="include/evaluator.h"/>
+    <File Name="include/featuregenerator.h"/>
+    <File Name="include/gradient.h"/>
+    <File Name="include/hCRF.h"/>
+    <File Name="include/hcrfExcep.h"/>
+    <File Name="include/inferenceengine.h"/>
+    <VirtualDirectory Name="Features">
+      <File Name="include/BackwardWindowRawFeatures.h"/>
+      <File Name="include/EdgeFeatures.h"/>
+      <File Name="include/EdgeObservationFeatures.h"/>
+      <File Name="include/FeaturesOne.h"/>
+      <File Name="include/LabelEdgeFeatures.h"/>
+      <File Name="include/WindowRawFeatures.h"/>
+      <File Name="include/RawFeatures.h"/>
+      <File Name="include/RawFeaturesSquare.h"/>
+      <File Name="include/SharedFeatures.h"/>
+      <File Name="include/GateNodeFeatures.h"/>
+      <File Name="include/StartFeatures.h"/>
+    </VirtualDirectory>
+    <File Name="include/matrix.h"/>
+    <File Name="include/model.h"/>
+    <File Name="include/MyFeatures.h"/>
+    <File Name="include/optimizer.h"/>
+  </VirtualDirectory>
+  <Settings Type="Static Library">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g" C_Options="-g" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <IncludePath Value="./include"/>
+        <IncludePath Value="../../3rdParty/asa/include"/>
+        <IncludePath Value="../../3rdParty/cgDescent/include"/>
+        <IncludePath Value="../../3rdParty/liblbfgs/include"/>
+        <IncludePath Value="../../3rdParty/owlqn/include"/>
+        <IncludePath Value="../../3rdParty/uncOptim/include"/>
+        <Preprocessor Value="USELBFGS"/>
+      </Compiler>
+      <Linker Options="" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName)_d.so" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[
+      ]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="gnu g++" DebuggerType="GNU gdb debugger" Type="Static Library" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="" C_Options="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" UseDifferentPCHFlags="no" PCHFlags="">
+        <IncludePath Value="./include"/>
+        <IncludePath Value="../../3rdParty/asa/include"/>
+        <IncludePath Value="../../3rdParty/cgDescent/include"/>
+        <IncludePath Value="../../3rdParty/liblbfgs/include"/>
+        <IncludePath Value="../../3rdParty/owlqn/include"/>
+        <IncludePath Value="../../3rdParty/uncOptim/include"/>
+        <Preprocessor Value="USELBFGS"/>
+      </Compiler>
+      <Linker Options="-O2" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/lib$(ProjectName).so" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[
+      ]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="">
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild/>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+  <Dependencies Name="Release"/>
+  <Dependencies Name="Debug"/>
+</CodeLite_Project>
