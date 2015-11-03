@@ -1,7 +1,6 @@
 # hCRF-light
 
-hCRF-light 1.1 (full version http://hcrf.sf.net)
-Copyright (C) 2012 Yale Song (yalesong@mit.edu)
+hCRF-light 2.0 (full version http://hcrf.sf.net)
 
 This library is a light version of hCRF library (http://hcrf.sf.net)
 that contains implementations of HCRF[1] and LDCRF[2]. I added two 
