@@ -44,12 +44,10 @@ use these two files to load a pretrained model.
 
  
 Change log  
-ver 3.0 Added One-Class CRF and HCRF (OCCRF, OCHCRF) [5]. Dropped
-        Windows support, switched to LINUX platforms.
-ver 2.0 Added Hierarchical Sequence Summarization (HSS) HCRF [4]  
-        Changed the name of the project [testMVLDM] to [testModels]  
-ver 1.1 Added a project matHCRF, a matlab wrapper  
-ver 1.0 Initial release  
+- ver 3.0 Added One-Class CRF and HCRF (OCCRF, OCHCRF) [5]. Dropped Windows support, switched to LINUX platforms.
+- ver 2.0 Added Hierarchical Sequence Summarization (HSS) HCRF [4]. Changed the name of the project [testMVLDM] to [testModels]  
+- ver 1.1 Added a project matHCRF, a matlab wrapper  
+- ver 1.0 Initial release  
   
 [1] Ariadna Quattoni, Sy Bor Wang, Louis-Philippe Morency, Michael Collins, Trevor Darrell: Hidden Conditional Random Fields. TPAMI 2007  
   
