@@ -43,12 +43,16 @@ The rest (model.txt and features.txt) contain model definitions; you can
 use these two files to load a pretrained model. 
 
  
-Change log  
+## Change log  
 - ver 3.0 Added One-Class CRF and HCRF (OCCRF, OCHCRF) [5]. Dropped Windows support, switched to LINUX platforms.
 - ver 2.0 Added Hierarchical Sequence Summarization (HSS) HCRF [4]. Changed the name of the project [testMVLDM] to [testModels]  
 - ver 1.1 Added a project matHCRF, a matlab wrapper  
 - ver 1.0 Initial release  
   
+## Disclaimer
+There is a patent pending on the ideas presented in One-class models (OCCRF and OCHCRF); so this code should only be used for academic purposes only.
+
+## References
 [1] Ariadna Quattoni, Sy Bor Wang, Louis-Philippe Morency, Michael Collins, Trevor Darrell: Hidden Conditional Random Fields. TPAMI 2007  
   
 [2] Louis-Philippe Morency, Ariadna Quattoni, Trevor Darrell: Latent-Dynamic Discriminative Models for Continuous Gesture Recognition. CVPR 2007  
