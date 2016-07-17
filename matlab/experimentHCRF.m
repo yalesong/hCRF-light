@@ -25,8 +25,8 @@ for fold=1:numel(splits)
             % Create model
             matHCRF('createToolbox',params.modelType,params.nbHiddenStates);
             matHCRF('setOptimizer',params.optimizer);
-            matHCRF('set','regularizationL2',params.regFactorL2);  
-            matHCRF('set','randomSeed',params.seed); 
+            matHCRF('setParam','regularizationL2',params.regFactorL2);  
+            matHCRF('setParam','randomSeed',params.seed); 
 
             % Train
             matHCRF('setData',seqs(splits{fold}.train),[],labels((splits{fold}.train)));

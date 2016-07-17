@@ -1,10 +1,7 @@
-function [ bRc, Rc ] = experimentHCNF( dataset, params )
+function [ bRc, Rc ] = experimentOCHCRF( dataset, params )
 
 if ~exist('H','var')
     H = params.nbHiddenStates;
-end
-if ~exist('G','var')
-    G = params.nbGates;
 end
 if ~exist('sigma','var')
     sigma = params.regFactorL2;
@@ -17,18 +14,17 @@ splits = dataset.splits;
 bRc = cell(1,numel(splits)); % best results
 Rc = cell(1,numel(splits)); % all results
 for fold=1:numel(splits)
-    best_accuracy = -1;
+    best_f1score = -1;
     best_idx = -1;
-    R = cell(numel(H),numel(G));    
+    R = cell(numel(H),numel(sigma));    
     for i=1:numel(H)  
-        for j=1:numel(G)
+        for j=1:numel(sigma)
             params.nbHiddenStates = H(i);
-            params.nbGates = G(j);
+            params.regFactorL2 = sigma(j);
 
             % Create model
             matHCRF('createToolbox',params.modelType,params.nbHiddenStates);
             matHCRF('setOptimizer',params.optimizer);
-            matHCRF('setParam','nbGates',params.nbGates);
             matHCRF('setParam','regularizationL2',params.regFactorL2);  
             matHCRF('setParam','randomSeed',params.seed); 
 
@@ -41,7 +37,6 @@ for fold=1:numel(splits)
             % Load model
             matHCRF('createToolbox',params.modelType,params.nbHiddenStates);
             matHCRF('setOptimizer',params.optimizer);
-            matHCRF('setParam','nbGates',params.nbGates);
             matHCRF('initToolbox');
             matHCRF('setModel',model,features);
 
@@ -57,14 +52,14 @@ for fold=1:numel(splits)
 
             [~,Ystar] = max(cell2mat(pYstar)); Ystar = Ystar-1;
             accuracy = sum(Ystar==labels(splits{fold}.valid))/numel(splits{fold}.valid);
-            if accuracy > best_accuracy
+            if accuracy > best_f1score
                 best_idx = [i j];
-                best_accuracy = accuracy;
+                best_f1score = accuracy;
             end 
 
             if params.verbose,
-                fprintf('[fold %d] H=%d, G=%d, acc_valid = %f, time = %.2f mins\n', ...
-                    fold, params.nbHiddenStates, params.nbGates, accuracy, time/60);
+                fprintf('[fold %d] H=%d, sigma=%.2f, acc_valid = %f, time = %.2f mins\n', ...
+                    fold, params.nbHiddenStates, params.regFactorL2, accuracy, time/60);
             end
 
             R{i,j}.model = model;
@@ -83,7 +78,6 @@ for fold=1:numel(splits)
     % Load the best model
     matHCRF('createToolbox',bR.params.modelType,bR.params.nbHiddenStates);
     matHCRF('setOptimizer',bR.params.optimizer);
-    matHCRF('setParam','nbGates',bR.params.nbGates);
     matHCRF('initToolbox');
     matHCRF('setModel',bR.model,bR.features);
 
@@ -100,8 +94,8 @@ for fold=1:numel(splits)
     [~,Ystar] = max(cell2mat(pYstar)); Ystar = Ystar-1;
     accuracy = sum(Ystar==labels(splits{fold}.test))/numel(splits{fold}.test);
 
-    fprintf('Best> [fold %d] HCRF H=%d, G=%d, acc_test = %f, time = %.2f mins \n', ...
-        fold, bR.params.nbHiddenStates, bR.params.nbGates, accuracy, bR.time/60);
+    fprintf('Best> [fold %d] OCHCRF H=%d, acc_test = %f, time = %.2f mins \n', ...
+        fold, bR.params.nbHiddenStates, accuracy, bR.time/60);
     bRc{fold}.accuracy_test = accuracy;
 end
 

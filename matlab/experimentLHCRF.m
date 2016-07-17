@@ -22,8 +22,8 @@ for fold=1:numel(splits)
             params.nbViews, params.nbHiddenStates, params.rawFeatureIndex);
         matHCRF('setOptimizer',params.optimizer);
         matHCRF('setInferenceEngine',params.inferenceEngine);
-        matHCRF('set','regularizationL2',params.regFactorL2); 
-        matHCRF('set','randomSeed', params.seed); 
+        matHCRF('setParam','regularizationL2',params.regFactorL2); 
+        matHCRF('setParam','randomSeed', params.seed); 
 
         % Train
         matHCRF('setData',seqs(splits{fold}.train),[],labels((splits{fold}.train)));

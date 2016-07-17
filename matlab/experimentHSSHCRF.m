@@ -37,11 +37,11 @@ for fold=1:numel(splits)
                     % Create model
                     matHCRF('createToolbox',params.modelType,params.nbHiddenStates);
                     matHCRF('setOptimizer',params.optimizer);
-                    matHCRF('set','regularizationL2',params.regFactorL2);  
-                    matHCRF('set','randomSeed',params.seed); 
-                    matHCRF('set','nbGates',params.nbGates);
-                    matHCRF('set','maxFeatureLayer',params.maxFeatureLayer);
-                    matHCRF('set','segmentTau',params.segmentTau);
+                    matHCRF('setParam','regularizationL2',params.regFactorL2);  
+                    matHCRF('setParam','randomSeed',params.seed); 
+                    matHCRF('setParam','nbGates',params.nbGates);
+                    matHCRF('setParam','maxFeatureLayer',params.maxFeatureLayer);
+                    matHCRF('setParam','segmentTau',params.segmentTau);
 
                     % Train
                     matHCRF('setData',seqs(splits{fold}.train),[],labels((splits{fold}.train)));
@@ -52,9 +52,9 @@ for fold=1:numel(splits)
                     % Load model
                     matHCRF('createToolbox',params.modelType,params.nbHiddenStates);
                     matHCRF('setOptimizer',params.optimizer);
-                    matHCRF('set','nbGates',params.nbGates); % nbGates needs to be set before initToolbox
-                    matHCRF('set','maxFeatureLayer',params.maxFeatureLayer);
-                    matHCRF('set','segmentTau',params.segmentTau);
+                    matHCRF('setParam','nbGates',params.nbGates); % nbGates needs to be set before initToolbox
+                    matHCRF('setParam','maxFeatureLayer',params.maxFeatureLayer);
+                    matHCRF('setParam','segmentTau',params.segmentTau);
                     matHCRF('initToolbox');
                     matHCRF('setModel',model,features);
 
@@ -98,9 +98,9 @@ for fold=1:numel(splits)
     % Load the best model
     matHCRF('createToolbox',bR.params.modelType,bR.params.nbHiddenStates);
     matHCRF('setOptimizer',bR.params.optimizer);
-    matHCRF('set','nbGates',bR.params.nbGates); % nbGates needs to be set before initToolbox
-    matHCRF('set','maxFeatureLayer',bR.params.maxFeatureLayer);
-    matHCRF('set','segmentTau',bR.params.segmentTau);
+    matHCRF('setParam','nbGates',bR.params.nbGates); % nbGates needs to be set before initToolbox
+    matHCRF('setParam','maxFeatureLayer',bR.params.maxFeatureLayer);
+    matHCRF('setParam','segmentTau',bR.params.segmentTau);
     matHCRF('initToolbox');
     matHCRF('setModel',bR.model,bR.features);
 
