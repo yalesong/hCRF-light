@@ -100,7 +100,7 @@ for fold=1:numel(splits)
     [~,Ystar] = max(cell2mat(pYstar)); Ystar = Ystar-1;
     accuracy = sum(Ystar==labels(splits{fold}.test))/numel(splits{fold}.test);
 
-    fprintf('Best> [fold %d] HCRF H=%d, G=%d, acc_test = %f, time = %.2f mins \n', ...
+    fprintf('Best> [fold %d] HCNF H=%d, G=%d, acc_test = %f, time = %.2f mins \n', ...
         fold, bR.params.nbHiddenStates, bR.params.nbGates, accuracy, bR.time/60);
     bRc{fold}.accuracy_test = accuracy;
 end
