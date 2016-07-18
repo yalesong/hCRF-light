@@ -12,7 +12,7 @@ linux=strcmp(arch,'GLNXA64') || strcmp(arch,'GLNX86');
 sixtyfourbits=strcmp(arch,'MACI64') || strcmp(arch,'GLNXA64') || strcmp(arch,'PCWIN64');
 
 debug=false;
-use_multithread=false;
+use_multithread=true;
 use_64bits_integers=false;
 
 if debug 
