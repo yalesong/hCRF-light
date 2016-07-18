@@ -23,61 +23,62 @@ for fold=1:numel(splits)
     for i=1:numel(H),
         for j=1:numel(sigma),
             for k=1:numel(rho),
-                
-            params.nbHiddenStates = H(i);
-            params.regFactorL2 = sigma(j);
-            params.rho = rho(k);
 
-            % Create model
-            matHCRF('createToolbox',params.modelType,params.nbHiddenStates);
-            matHCRF('setOptimizer',params.optimizer);
-            matHCRF('setParam','rho',params.rho); 
-            matHCRF('setParam','regularizationL2',params.regFactorL2);  
-            matHCRF('setParam','randomSeed',params.seed); 
+                params.nbHiddenStates = H(i);
+                params.regFactorL2 = sigma(j);
+                params.rho = rho(k);
 
-            % Train
-            matHCRF('setData',seqs(splits{fold}.train),[],int32(zeros(1,numel(splits{fold}.train))));
-            id=tic(); matHCRF('train'); time=toc(id); 
-            [model,features] = matHCRF('getModel');    
-            matHCRF('clearToolbox');
+                % Create model
+                matHCRF('createToolbox',params.modelType,params.nbHiddenStates);
+                matHCRF('setOptimizer',params.optimizer);
+                matHCRF('setParam','rho',params.rho); 
+                matHCRF('setParam','regularizationL2',params.regFactorL2);  
+                matHCRF('setParam','randomSeed',params.seed); 
 
-            % Load model
-            matHCRF('createToolbox',params.modelType,params.nbHiddenStates);
-            matHCRF('setOptimizer',params.optimizer);
-            matHCRF('initToolbox');
-            matHCRF('setModel',model,features);
+                % Train
+                matHCRF('setData',seqs(splits{fold}.train),[],int32(zeros(1,numel(splits{fold}.train))));
+                id=tic(); matHCRF('train'); time=toc(id); 
+                [model,features] = matHCRF('getModel');    
+                matHCRF('clearToolbox');
 
-            % Test on validatation split
-            pYstar = cell(1,numel(splits{fold}.valid));
-            for sample=1:numel(splits{fold}.valid), 
-                matHCRF('setData',seqs(splits{fold}.valid(sample)),[],labels(splits{fold}.valid(sample)));
-                matHCRF('test');
-                ll = matHCRF('getResults');
-                pYstar{sample} = ll{1};
+                % Load model
+                matHCRF('createToolbox',params.modelType,params.nbHiddenStates);
+                matHCRF('setOptimizer',params.optimizer);
+                matHCRF('initToolbox');
+                matHCRF('setModel',model,features);
+
+                % Test on validatation split
+                pYstar = cell(1,numel(splits{fold}.valid));
+                for sample=1:numel(splits{fold}.valid), 
+                    matHCRF('setData',seqs(splits{fold}.valid(sample)),[],labels(splits{fold}.valid(sample)));
+                    matHCRF('test');
+                    ll = matHCRF('getResults');
+                    pYstar{sample} = ll{1};
+                end
+                matHCRF('clearToolbox');
+
+                [~,Ystar] = max(cell2mat(pYstar)); Ystar = Ystar-1;
+                accuracy = sum(Ystar==labels(splits{fold}.valid))/numel(splits{fold}.valid);
+                if accuracy > best_f1score
+                    best_idx = [i j k];
+                    best_f1score = accuracy;
+                end 
+
+                if params.verbose,
+                    fprintf('[fold %d] H=%d, sigma=%.2f, rho=%.2f, acc_valid = %f, time = %.2f mins\n', ...
+                        fold, params.nbHiddenStates, params.regFactorL2, params.rho, accuracy, time/60);
+                end
+
+                R{i,j,k}.model = model;
+                R{i,j,k}.features = features;
+                R{i,j,k}.params = params;
+                R{i,j,k}.accuracy_valid = accuracy;
+                R{i,j,k}.time = time; 
             end
-            matHCRF('clearToolbox');
-
-            [~,Ystar] = max(cell2mat(pYstar)); Ystar = Ystar-1;
-            accuracy = sum(Ystar==labels(splits{fold}.valid))/numel(splits{fold}.valid);
-            if accuracy > best_f1score
-                best_idx = [i j k];
-                best_f1score = accuracy;
-            end 
-
-            if params.verbose,
-                fprintf('[fold %d] H=%d, sigma=%.2f, rho=%.2f, acc_valid = %f, time = %.2f mins\n', ...
-                    fold, params.nbHiddenStates, params.regFactorL2, params.rho, accuracy, time/60);
-            end
-
-            R{i,j,k}.model = model;
-            R{i,j,k}.features = features;
-            R{i,j,k}.params = params;
-            R{i,j,k}.accuracy_valid = accuracy;
-            R{i,j,k}.time = time; 
         end
     end
     Rc{fold} = R;
-    bRc{fold} = R{best_idx(1),best_idx(2),best_ied(3)};
+    bRc{fold} = R{best_idx(1),best_idx(2),best_idx(3)};
 end
 
 for fold=1:numel(splits)
