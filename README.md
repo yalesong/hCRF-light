@@ -20,7 +20,9 @@ of functionalities provided by the hCRF-light library.
 
 First, run the following commmand to train and test an HCRF with toy data:
 ```
-./distribute/bin/hcrf-light -m hcrf -h 4 -s 10 -Fd ./data/toy/dataTrain.csv -Fq ./data/toy/seqLabelsTrain.csv -FD ./data/toy/dataTest.csv -FQ ./data/toy/seqLabelsTest.csv
+./distribute/bin/hcrf-light -m hcrf -h 4 -s 10 \
+-Fd ./data/toy/dataTrain.csv -Fq ./data/toy/seqLabelsTrain.csv \
+-FD ./data/toy/dataTest.csv -FQ ./data/toy/seqLabelsTest.csv
 ```
 It trains an HCRF (-m hcrf) with 4 hidden states (-h 4) and the L2
 regularization factor set at 10 (-s 10). It will train the model using
