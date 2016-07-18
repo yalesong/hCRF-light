@@ -969,10 +969,8 @@ static void setOptimizer(int nlhs, mxArray *plhs[],int nrhs,const mxArray *prhs[
 	{
 		if(!strcmp(strOptimizer,"lbfgs")||!strcmp(strOptimizer,"LBFGS"))
 			opt = OPTIMIZER_LBFGS;
-#ifdef USENRBM
 		else if(!strcmp(strOptimizer,"nrbm")||!strcmp(strOptimizer,"NRBM"))
 			opt = OPTIMIZER_NRBM;
-#endif
 		else
 			mexErrMsgTxt("hCRF: Invalid optimiser string.\n");
 	}
