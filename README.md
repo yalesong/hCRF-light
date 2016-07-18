@@ -35,14 +35,27 @@ Once the process is terminated, it will create four result files:
 - features.txt
 
 The first two (results.txt and stats.txt) contain evaluation results.
-You can check how the model performed by reading stats.txt (in this toy
-example, you should get 100% precision and recall rates). You can also
-check prediction results for each test sample  by reading results.txt.
+The file results.txt contains prediction results for each test sample.
+The file stats.txt contains precision / recall / F1 score statistics
+for each class category. The rest (model.txt and features.txt) contain 
+model definitions; you can use these two files to load a pretrained model. 
 
-The rest (model.txt and features.txt) contain model definitions; you can
-use these two files to load a pretrained model. 
+Let's check the result file stats.txt:
+```
+$ cat stats.txt
+TESTING DATA SET
 
- 
+Calculations per sequences:                                                                     
+Label   True+   Marked+ Detect+ Prec.   Recall  F1                                              
+0:      3       3       3       100     100     100                                             
+1:      3       3       3       100     100     100                                             
+2:      3       3       3       100     100     100                                             
+-----------------------------------------------------------------------                         
+Ov:     9       9       9       100     100     100   
+```
+Our test dataset contained 9 samples in total, equally divided into three 
+classes. We can see that the trained model correctly predicted all 9 samples.
+
 ## Change log  
 - ver 3.0 Added One-Class CRF and HCRF (OCCRF, OCHCRF) [5]. Dropped Windows support, switched to LINUX platforms.
 - ver 2.0 Added Hierarchical Sequence Summarization (HSS) HCRF [4]. Changed the name of the project [testMVLDM] to [testModels]  
