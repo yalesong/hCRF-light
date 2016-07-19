@@ -15,9 +15,9 @@ dataset.seqs = D.seqs;
 dataset.labels = cellfun(@(x) int32(unique(x)), D.labels);
 
 % divide data into half
-dataset.splits{1}.train = 1:200;
-dataset.splits{1}.valid = 300:400;
-dataset.splits{1}.test = 300:400;
+dataset.splits{1}.train = 1:100;
+dataset.splits{1}.valid = 101:300;
+dataset.splits{1}.test = 101:300;
 
 %% Common parameter values
 params.common.optimizer = 'nrbm';

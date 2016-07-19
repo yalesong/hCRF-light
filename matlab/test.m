@@ -29,7 +29,7 @@ dataset.splits{1}.test = 1801:2400;
 %% Common parameter values
 params.common.optimizer = 'lbfgs';
 params.common.nbHiddenStates = 8;
-params.common.regFactorL2 = 1;
+params.common.regFactorL2 = 10;
 params.common.seed = 02139;
 params.common.verbose = false;
 
@@ -39,18 +39,12 @@ params.hcrf = params.common;
 params.hcrf.modelType = 'hcrf';
 [bRc.hcrf,Rc.hcrf] = experimentHCRF(dataset,params.hcrf);
 
-%% Experiment with HCNF
-fprintf('Training Hidden Conditional Neural Fields (HCNF)\n');
-params.hcnf = params.hcrf;
-params.hcnf.nbGates = 12;
-[bRc.hcnf,Rc.hcnf] = experimentHCNF(dataset,params.hcnf);
- 
 %% Experiment with HSS-HCRF
 % See Song et al., CVPR 2013
 fprintf('Training Hierarchical Sequence Summarization HCNF (HSS-HCNF)\n');
 params.hsshcrf = params.common;
 params.hsshcrf.modelType = 'hsshcrf';
-params.hsshcrf.nbHiddenStates = 8;
+params.hsshcrf.nbHiddenStates = 4;
 params.hsshcrf.nbGates = 12;
 params.hsshcrf.segmentTau = .5; 
 params.hsshcrf.maxFeatureLayer = 4;
@@ -58,12 +52,13 @@ params.hsshcrf.maxFeatureLayer = 4;
 
 %% Experiment with Multi-view HCRF (Linked topology)
 % See Song et al., CVPR 2012
+% This part may take longer
 fprintf('Training Multi-view Hidden Conditional Random Fields (MV-HCRF)\n');
 params.lhcrf = params.common;
 params.lhcrf.modelType = 'mvhcrf';
 params.lhcrf.graphType = 'linked'; 
-params.lhcrf.inferenceEngine = 'LBP'; % use JT for exact inference
+params.lhcrf.inferenceEngine = 'JT'; % use LBP for approximate inference
 params.lhcrf.nbViews = 2;
-params.lhcrf.nbHiddenStates = {[8 8]}; 
+params.lhcrf.nbHiddenStates = {[4 4]}; 
 params.lhcrf.rawFeatureIndex = {[0:3,8:13], [4:7,14:19]}; % idx of L and R arms
 [bRc.lhcrf,Rc.lhcrf] = experimentLHCRF(dataset,params.lhcrf); 
