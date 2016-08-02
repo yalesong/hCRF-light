@@ -1,6 +1,6 @@
 /*
- hCRF-light Library 2.0 (full version http://hcrf.sf.net)
- Copyright (C) 2012 Yale Song (yalesong@mit.edu)
+ hCRF-light Library 3.0 (full version http://hcrf.sf.net)
+ Copyright (C) Yale Song (yalesong@mit.edu)
  
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
