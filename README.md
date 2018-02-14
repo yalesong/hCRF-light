@@ -24,6 +24,8 @@ First, run the following commmand to train and test an HCRF with toy data:
 -Fd ./data/toy/dataTrain.csv -Fq ./data/toy/seqLabelsTrain.csv \
 -FD ./data/toy/dataTest.csv -FQ ./data/toy/seqLabelsTest.csv
 ```
+If you're facing "Cannot find shared library" error, please refer this to [fix](https://github.com/yalesong/hCRF-light/issues/3) that.
+
 It trains an HCRF (-m hcrf) with 4 hidden states (-h 4) and the L2
 regularization factor set at 10 (-s 10). It will train the model using
 data and label files passed by the parameters -Fd and -Fq, respectively;
